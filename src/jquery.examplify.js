@@ -70,16 +70,16 @@ if (typeof MINIFIED === 'undefined'){
      * Using the options object, you can fully configure the tag that is created:
      *
      * {
-     *     tag          : 'code',           // The HTML tag into which you want your example to be inserted. Defaults to 'pre'
-     *     scope        : 'body',           // Selector for tag inside which the examplify script tags will be found. Defaults to 'body'
-     *     prefix       : 'foobar',         // The prefix used in the id of each examplify example script. Defaults to 'examplify'
+     *     tag          : 'code',                   // The HTML tag into which you want your example to be inserted. Defaults to 'pre'
+     *     scope        : 'body',                   // Selector for tag inside which the examplify script tags will be found. Defaults to 'body'
+     *     prefix       : 'foobar',                 // The prefix used in the id of each examplify example script. Defaults to 'examplify'
      *     attr : {
-     *         class    : 'prettyprint'     // Object containing key-value pairs which will be added as attributes to the example tag
+     *         class    : 'prettyprint'             // Object containing key-value pairs which will be added as attributes to the example tag
      *     },
-     *     onEach : function(){             // Optional function to call each time example tag has been inserted
+     *     onEach : function(example, counter){    // Function to call each time example tag has been inserted
      *         console.log('tag inserted');
      *     },
-     *     onComplete : function(){         // Optional function to call once all example tags have been inserted
+     *     onComplete : function(){                 // Function to call once all example tags have been inserted
      *         console.log('done!');
      *     }
      * }
@@ -105,17 +105,18 @@ if (typeof MINIFIED === 'undefined'){
             counter        += 1;
             var $this       = $(this);
             var id          = $this.attr('id');
+            var example     = $this.html();
 
             if (!(id in cache)){
 
                 cache[id]   = true;
 
                 if (typeof id === 'string' && id.indexOf(options.prefix) > -1 && typeof options.tag !== null){
-                    $this.after(buildOpeningTag(options) + $this.html() + '</'+options.tag+'>');
+                    $this.after(buildOpeningTag(options) + example + '</'+options.tag+'>');
                 }
 
                 if (typeof options.onEach === 'function'){
-                    options.onEach(counter);
+                    options.onEach(example,counter);
                 }
 
                 if (counter === totalScripts && typeof options.onComplete === 'function'){

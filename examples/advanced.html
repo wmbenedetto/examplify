@@ -91,10 +91,9 @@
             <code>prefix</code>: The string with which all of your examplified script ids are prefixed. Defaults to "examplify".
         </li>
         <li>
-            <code>onEach</code>: Function to call each time an example tag has been added to the page. It is passed a single
-            argument: the current example number. So, if there were three examples in the page, <code>onEach()</code> would be passed
-            1 then 2 then 3 as each is added to the page. If you passed <code>null</code> for the <code>tag</code> option,
-            then you could use this function to insert the examples into the page yourself.
+            <code>onEach</code>: Function to call each time an example tag has been added to the page. It is passed two
+            arguments: the current example's code, and its example number. If you passed <code>null</code> for the <code>tag</code>
+            option, then you could use this function to insert the examples into the page yourself.
         </li>
         <li>
             <code>onComplete</code>: Function to call once all examples have been added to the page.
@@ -121,7 +120,7 @@
             prefix  : 'foobar',
 
             // After each example is added to the page, call this function
-            onEach : function(){
+            onEach : function(example,counter){
                 console.log('Example rendered');
             },
 
