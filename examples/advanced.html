@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>examplify</title>
+
+    <link href="assets/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="assets/prettify.css" type="text/css" rel="stylesheet" />
+
+    <script language="JavaScript" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js" async=""></script>
+    <script language="JavaScript" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="../src/jquery.examplify.js"></script>
+    <script language="JavaScript" type="text/javascript" src="assets/prettify.js"></script>
+
+    <style type="text/css">
+        body {
+            margin:15px auto 30px auto;
+            width:980px;
+        }
+
+        h1, h2, h3, h4 {
+            margin-top:24px;
+        }
+
+        .example {
+
+            border:1px solid #ccc;
+            font-family:monospace;
+            margin:16px 0;
+            padding:10px;
+            overflow: hidden;
+        }
+
+        .example h4 {
+            margin:0;
+        }
+
+        .box {
+            background:#666;
+            color:white;
+            font-size:18px;
+            font-weight:bold;
+            text-align:center;
+            height:50px;
+            float:left;
+            margin:10px;
+            width:50px;
+        }
+
+        .buttons {
+            clear:left;
+        }
+
+        .button {
+            float:left;
+            margin:10px 10px 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>
+        examplify
+    </h1>
+    <h3>
+        Advanced usage
+    </h3>
+    <p>
+        <strong>examplify</strong> is highly configurable, so you can customize it to the needs of your site.
+    </p>
+    <p>
+        All customization is done via an <code>options</code> object passed to the <code>$.examplify()</code> function:
+    </p>
+    <ul>
+        <li>
+            <code>tag</code>: The HTML tag into which examplify will insert your code example. Defaults to <code>pre</code>.
+            If you set this to <code>null</code>, no tag will be inserted. You might want to use <code>null</code> if you have your own
+            custom function you want to use for inserting examples into the page (which you can call using the <code>onEach()</code>
+            function explained below.)
+        </li>
+        <li>
+            <code>attr</code>: Object containing key-value pairs which will be added as attributes to the HTML tag. Example use-case
+            would be to apply a class and/or id to the example tag.
+        </li>
+        <li>
+            <code>scope</code>: By default, examplify looks for <code>script</code> tags with an id prefixed by "examplify"
+            in the body of the page. If you want to restrict the scope of the search to, say, a specific div inside which all
+            the examplified scripts live, you would pass the jQuery selector for that div as the scope.
+        </li>
+        <li>
+            <code>prefix</code>: The string with which all of your examplified script ids are prefixed. Defaults to "examplify".
+        </li>
+        <li>
+            <code>onEach</code>: Function to call each time an example tag has been added to the page. It is passed a single
+            argument: the current example number. So, if there were three examples in the page, <code>onEach()</code> would be passed
+            1 then 2 then 3 as each is added to the page. If you passed <code>null</code> for the <code>tag</code> option,
+            then you could use this function to insert the examples into the page yourself.
+        </li>
+        <li>
+            <code>onComplete</code>: Function to call once all examples have been added to the page.
+        </li>
+    </ul>
+    <div id="examples">
+    <script type="text/javascript" id="foobar-1">
+    $(document).ready(function(){
+
+        $.examplify({
+
+            // Create custom 'xmp' tag
+            tag : 'xmp',
+
+            // Add class="prettyprint lang-js" to xmp tag
+            attr : {
+                'class' : 'prettyprint lang-js'
+            },
+
+            // Only search for examplified scripts inside div with id="examples"
+            scope   : '#examples',
+
+            // Look for scripts with ids starting with "foobar"
+            prefix  : 'foobar',
+
+            // After each example is added to the page, call this function
+            onEach : function(){
+                console.log('Example rendered');
+            },
+
+            // Once all examples have been added to the page, call this function
+            onComplete : function(){
+                prettyPrint();
+                console.log('Example rendering complete');
+            }
+        });
+    });
+    </script>
+    </div>
+    <h3>
+        Looks nice, right?
+    </h3>
+    <p>
+        Syntax highlighting is key to making your examplified code readable. The code above is styled using the awesome Prettify plugin.
+        You can download it here: <a href="http://code.google.com/p/google-code-prettify/" target="_blank">http://code.google.com/p/google-code-prettify/</a>
+    </p>
+    <p>
+        The options in the example above configure Prettify to render the highlighted code.
+    </p>
+    <ul>
+        <li>
+            The <code>xmp</code> tag is what Prettify uses to highlight HTML.
+        </li>
+        <li>
+            The "prettyprint" and "lang-js" classes tell Prettify to highlight the code inside that tag as JavaScript.
+        </li>
+        <li>
+            The <code>prettyPrint()</code> function in <code>onComplete()</code> applies the highlighting to the page.
+        </li>
+    </ul>
+    <p>
+        If you use Prettify in your own project, you'll want to use the same options.
+    </p>
+    <p>
+        This is especially important for the <code>prettyPrint()</code>
+        function. The Prettify docs tell you to put it in the <code>onload</code> attribute of the <code>body</code> tag, but it you do that, it
+        won't highlight the examplified code. You must call <code>prettyPrint()</code> in the <code>onComplete()</code> function for it to work.
+    </p>
+    <h3>
+        Questions? Issues? Suggestions?
+    </h3>
+    <p>
+        Please submit them via the Github <a href="https://github.com/wmbenedetto/examplify/issues" target="_blank">Issues</a> section so everyone can benefit from the answer.
+    </p>
+</body>
+</html>

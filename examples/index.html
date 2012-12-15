@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>examplify</title>
+
+    <link href="assets/bootstrap.min.css" type="text/css" rel="stylesheet" />
+
+    <script language="JavaScript" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js" async=""></script>
+    <script language="JavaScript" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="../src/jquery.examplify.js"></script>
+
+    <style type="text/css">
+        body {
+            margin:15px auto 30px auto;
+            width:980px;
+        }
+
+        h1, h2, h3, h4 {
+            margin-top:24px;
+        }
+
+        .example {
+
+            border:1px solid #ccc;
+            font-family:monospace;
+            margin:16px 0;
+            padding:10px;
+            overflow: hidden;
+        }
+
+        .example h4 {
+            margin:0;
+        }
+
+        .box {
+            background:#666;
+            color:white;
+            font-size:18px;
+            font-weight:bold;
+            text-align:center;
+            height:50px;
+            float:left;
+            margin:10px;
+            width:50px;
+        }
+
+        .buttons {
+            clear:left;
+        }
+
+        .button {
+            float:left;
+            margin:10px 10px 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>
+        examplify
+    </h1>
+    <h3>
+        Introduction
+    </h3>
+    <p>
+        <strong>examplify</strong> is a simple jQuery plugin born of necessity.
+    </p>
+    <p>
+        If you've ever written about code, either in your blog, in your documentation, or in example pages like this,
+        you've run into situations where you wanted to display a working code example in the page.
+    </p>
+    <p>
+        Your first instinct may be to write the script, and then copy and paste it into a <code>pre</code> tag in the
+        page for display.
+    </p>
+    <p>
+        However, after doing that a few times, you'll realize that you're now editing code in two places: once in your
+        real code, and once in your example. Either that, or you're forgetting to update your example, meaning it's out
+        of sync with your working code and will confuse the hell out of your users when they cut-and-paste the example from your
+        page and it doesn't work.
+    </p>
+    <p>
+        <strong>examplify</strong> solves that problem.
+    </p>
+    <h3>
+        Getting started
+    </h3>
+    <p>
+        Using examplify is easy.
+    </p>
+    <p>
+        First, make sure you include jQuery and examplify at the top of the page. Make sure jQuery is included first.
+    </p>
+    <p>
+        Then, write each of your code examples in separate <code>script</code> tags, preferably in the body of the page.
+    </p>
+    <p>
+        Give each <code>script</code> tag a unique id, prefixed with "examplify".
+    </p>
+    <p>
+        It doesn't matter what the id is, as long as it starts with the prefix, and it's unique. Could be "examplify-some-example-name" or
+        "examplifySomeExampleName" or "examplify_someExampleName" or whatever convention you prefer.
+    </p>
+    <p>
+        Then, simply call <code>$.examplify()</code> inside <code>$(document).ready()</code>, and you're done. Whatever code
+        is in your examplify <code>script</code> tags will be spit out into the page inside a <code>pre</code> tag (by default).
+    </p>
+    <script type="text/javascript" id="examplify-1">
+    $(document).ready(function(){
+        $.examplify();
+    });
+    </script>
+    <h3>It's alive!</h3>
+    <p>
+        The best part about examplify is that all your code is live JavaScript, so it's fully executable as a code sample. For example:
+    </p>
+    <script type="text/javascript" id="examplify-2">
+    $(document).ready(function(){
+        $('#example-2-button').click(function(){
+            alert('You clicked the button!');
+        });
+    });
+    </script>
+    <p>
+        <input id="example-2-button" type="button" value="CLICK ME!" />
+    </p>
+    <p>
+        (To see how these examples are implemented, simply view the source of this page.)
+    </p>
+    <h3>
+        Want to know more?
+    </h3>
+    <p>
+        Once you've got the basics down, check out the <a href="advanced.html">Advanced Usage</a> page to see how you
+        can configure and customize examplify to suit your needs.
+    </p>
+    <p>
+        If you have any questions or issues, please submit them via the Github <a href="https://github.com/wmbenedetto/examplify/issues" target="_blank">Issues</a> section so everyone can benefit from the answer.
+    </p>
+</body>
+</html>
