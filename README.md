@@ -80,7 +80,6 @@ $(document).ready(function(){
 
         // Once all examples have been added to the page, call this function
         onComplete : function(){
-            prettyPrint();
             console.log('Example rendering complete');
         }
     });
