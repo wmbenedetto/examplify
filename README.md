@@ -7,7 +7,7 @@ examplify
 
 **examplify** is a simple jQuery plugin born of necessity.
 
-If you've ever written about code, either in your blog, in your documentation, or in example pages like this, you've run into situations where you wanted to display a working code example in the page.
+If you've ever written about code, either in your blog, in your documentation, or in example pages for your project, you've run into situations where you wanted to display a working code example in the page.
 
 Your first instinct may be to write the script, and then copy and paste it into a `pre` tag in the page for display.
 
@@ -39,7 +39,9 @@ $(document).ready(function(){
 
 ## It's alive!
 
-The best part about examplify is that all your code is live JavaScript, so it's fully executable as a code sample. To see it in action, open index.html in the examples dir in your browser.
+The best part about examplify is that all your code is live JavaScript, so it's fully executable as a code sample. 
+
+To see it in action, clone this repo, then open examples/index.html in your browser.
 
 ## Advanced usage
 
@@ -98,7 +100,7 @@ Finally, make sure you're calling `$.examplify()` inside `$(document).ready()`.
 
 #### Does examplify work with included JavaScript files?
 
-Nope. It only works with inline script tags.
+Nope. It only works with inline script tags. It's really only designed to display short code samples. If you have an included JavaScript file, chances are it's too long to be a singular example anyway.
 
 #### What if I don't want the example to be inserted immediately after the `script` tag in the page? Can I tell examplify where to insert the tag?
 
@@ -110,7 +112,7 @@ Then, add an `onEach()` function that inserts the example into the page where yo
 
 #### Do my scripts have to be inline in the body of the page? Can they be in the head instead?
 
-Technically, yes. It's more work though, because you'll have to use a custom `onEach()` function to insert the examples into the page yourself.
+Technically, yes. It's more work though, because you'll have to use a custom `onEach()` function to insert the examples into the page yourself. (If you don't do that, the examplified code will be inserted into the `head` tag.)
 
 To pull examplified scripts from the head instead of the body, you'll need to set the `scope` option to "head." 
 
@@ -122,9 +124,7 @@ No. Each example must be in its own script tag with its own unique, prefixed id.
 
 No, that's outside the scope of this plugin. I highly recommend [Prettify] (http://code.google.com/p/google-code-prettify) for syntax highlighting.
 
-If you do use Prettify, note that you'll need to call its `prettyPrint()` function in a custom `onComplete()` function added to the examplify options. That will run Prettify once all the examples are added to the page. 
-
-If you follow the Prettify docs and call `prettyPrint()` in the body's onload attribute, your examplified scripts won't be highlighted.
+If you do use Prettify, note that you'll need to call its `prettyPrint()` function in a custom `onComplete()` function added to the examplify options. That will run Prettify once all the examples are added to the page. If you follow the Prettify docs and call `prettyPrint()` in the body's onload attribute, your examplified scripts won't be highlighted.
 
 ## Questions? Bugs? Suggestions?
 
