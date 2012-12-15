@@ -5,8 +5,6 @@ examplify
 
 ## Introduction 
 
-**examplify** is a simple jQuery plugin born of necessity.
-
 If you've ever written about code, either in your blog, in your documentation, or in example pages for your project, you've run into situations where you wanted to display a working code example in the page.
 
 Your first instinct may be to write the script, and then copy and paste it into a `pre` tag in the page for display.
