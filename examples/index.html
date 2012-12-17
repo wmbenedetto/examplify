@@ -60,6 +60,9 @@
     <h1>
         examplify
     </h1>
+    <p>
+        <strong>examplify</strong> is a jQuery plugin for turning live JavaScript into working in-page code examples.
+    </p>
     <h3>
         Introduction
     </h3>
@@ -72,13 +75,20 @@
         page for display.
     </p>
     <p>
-        However, after doing that a few times, you'll realize that you're now editing code in two places: once in your
-        real code, and once in your example. Either that, or you're forgetting to update your example, meaning it's out
-        of sync with your working code and will confuse the hell out of your users when they cut-and-paste the example from your
-        page and it doesn't work.
+       However, after doing that a few times, you'll realize that every time you change your code or your example (like
+       to fix a bug), you have to edit your code in two places: once in your real code, and once in the example code.
+    </p>
+    <p>
+        (Either that, or you're forgetting to update your example, meaning it's out of sync with your working code and
+        will confuse the hell out of your users when they cut-and-paste the example from your page and it doesn't work.)
     </p>
     <p>
         <strong>examplify</strong> solves that problem.
+    </p>
+    <p>
+        With examplify, you simply write your examples as regular JavaScript, in regular <code>script</code> tags. Examplify takes
+        each script and injects it into the page as HTML, so the examples your users see are identical to the ones that 
+        are being executed on the page.
     </p>
     <h3>
         Getting started
@@ -110,7 +120,8 @@
     </script>
     <h3>It's alive!</h3>
     <p>
-        The best part about examplify is that all your code is live JavaScript, so it's fully executable as a code sample. For example:
+        The best part about examplify is that all your code is live JavaScript, so everything is fully executable as code
+        examples/demos in your page.
     </p>
     <script type="text/javascript" id="examplify-2">
     $(document).ready(function(){
