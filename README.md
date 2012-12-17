@@ -41,7 +41,7 @@ $(document).ready(function(){
 
 The best part about examplify is that all your code is live JavaScript, so everything is fully executable as code examples/demos in your page. 
 
-To see it in action, clone this repo, then open examples/index.html in your browser.
+To see it in action, download the latest tag (or clone this repo), then open examples/index.html in your browser.
 
 ## Advanced usage
 
