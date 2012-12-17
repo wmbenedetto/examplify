@@ -1,7 +1,7 @@
 examplify
 =========
 
-**examplify** is a jQuery plugin for turning live JavaScript scripts into working in-page code examples.
+**examplify** is a jQuery plugin for turning live JavaScript into working in-page code examples.
 
 ## Introduction 
 
@@ -9,11 +9,13 @@ If you've ever written about code, either in your blog, in your documentation, o
 
 Your first instinct may be to write the script, and then copy and paste it into a `pre` tag in the page for display.
 
-However, after doing that a few times, you'll realize that you're now editing code in two places: once in your real code, and once in your example. 
+However, after doing that a few times, you'll realize that every time you change your code or your example (like to fix a bug), you have to edit your code in two places: once in your real code, and once in the example code. 
 
 (Either that, or you're forgetting to update your example, meaning it's out of sync with your working code and will confuse the hell out of your users when they cut-and-paste the example from your page and it doesn't work.)
 
 **examplify** solves that problem.
+
+With examplify, you simply write your examples as regular JavaScript, in regular `script` tags. Examplify takes each script and injects it into the page as HTML, so the examples your users see are identical to the ones that are being executed on the page.
 
 ## Getting started
 
@@ -37,7 +39,7 @@ $(document).ready(function(){
 
 ## It's alive!
 
-The best part about examplify is that all your code is live JavaScript, so it's fully executable as a code sample. 
+The best part about examplify is that all your code is live JavaScript, so everything is fully executable as code examples/demos in your page. 
 
 To see it in action, clone this repo, then open examples/index.html in your browser.
 
@@ -59,7 +61,7 @@ $(document).ready(function(){
 
     $.examplify({
 
-        // Create custom 'xmp' tag
+        // Create custom 'xmp' tag (used by Prettify to render html samples)
         tag : 'xmp',
 
         // Add class="prettyprint lang-js" to xmp tag
@@ -73,12 +75,12 @@ $(document).ready(function(){
         // Look for scripts with ids starting with "foobar"
         prefix  : 'foobar',
 
-        // After each example is added to the page, call this function
+        // After each example is added to the page, this function is called
         onEach : function(example,counter){
             console.log('Example rendered');
         },
 
-        // Once all examples have been added to the page, call this function
+        // Once all examples have been added to the page, this function is called
         onComplete : function(){
             console.log('Example rendering complete');
         }
@@ -93,6 +95,8 @@ First, make sure that you're including jQuery and examplify at the *top* of the 
 
 Second, make sure your each example script has an id that begins with the prefix. The default prefix is "examplify". The script ids must be unique. For example, "examplify-1", "examplify-2", etc.
 
+Third, make sure your scripts are in the body of the page. Examplify injects the code as HTML directly after the script from which the code is extracted. If your code in the `head` tag, the examples will be injected there too.
+
 Finally, make sure you're calling `$.examplify()` inside `$(document).ready()`.
 
 #### Does examplify work with included JavaScript files?
@@ -105,7 +109,28 @@ No, but you can use examplify's `onEach()` function to do it yourself.
 
 First, pass `null` as the `tag` option. That will tell examplify not to insert the tag itself. 
 
-Then, add an `onEach()` function that inserts the example into the page where you want it. The example code is passed as the first argument to `onEach()`. The second argument is the example number, which could be used to disambiguate examples in the page.
+Then, add an `onEach()` function that inserts the example into the page where you want it. The example code is passed as the first argument to `onEach()`. The second argument is the example number, which could be used to disambiguate examples in the page. 
+
+For example:
+
+```javascript
+$(document).ready(function(){
+
+    $.examplify({
+
+        // null tag tells examplify not to inject its own tag
+        tag : null,
+        
+        // Add each example to a div with an id of "sample-container-X", where X is the number
+        // of the code example. For example, first code example would be injected into a div
+        // with id="sample-container-1". Of course, you need to make sure that div exists in
+        // the page before running examplify.
+        onEach : function(example,counter){
+            $('#sample-container-'+counter).html(example);
+        }
+    });
+});
+```
 
 #### Do my scripts have to be inline in the body of the page? Can they be in the head instead?
 
@@ -122,6 +147,29 @@ No. Each example must be in its own script tag with its own unique, prefixed id.
 No, that's outside the scope of this plugin. I highly recommend [Prettify] (http://code.google.com/p/google-code-prettify) for syntax highlighting.
 
 If you do use Prettify, note that you'll need to call its `prettyPrint()` function in a custom `onComplete()` function added to the examplify options. That will run Prettify once all the examples are added to the page. If you follow the Prettify docs and call `prettyPrint()` in the body's onload attribute, your examplified scripts won't be highlighted.
+
+For example:
+
+```javascript
+$(document).ready(function(){
+
+    $.examplify({
+
+        // Create custom 'xmp' tag (used by Prettify to render html samples)
+        tag : 'xmp',
+
+        // Add class="prettyprint"  to xmp tag
+        attr : {
+            'class' : 'prettyprint'
+        },
+
+        // Once all examples have been added to the page, tell Prettify to highlight the code
+        onComplete : function(){
+            prettyPrint();
+        }
+    });
+});
+```
 
 ## Questions? Bugs? Suggestions?
 
